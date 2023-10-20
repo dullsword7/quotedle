@@ -9,7 +9,7 @@ exports.homepage = async(req, res) => {
         description: 'Quote Guessing Game'
     }
 
-    res.render('../views/layouts/homepage.ejs', locals);
+    res.render('index.ejs', locals);
 }
 
 exports.check = async(req, res) => {
@@ -17,6 +17,6 @@ exports.check = async(req, res) => {
         title: 'check',
         description: 'checking guess'
     }
-
-    res.render('../views/layouts/homepage.ejs', locals);
+    console.log(req.body.guessTerm);
+    res.render('index.ejs', locals);
 }
