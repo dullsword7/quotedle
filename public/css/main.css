@@ -1,0 +1,14 @@
+* {
+    color: #ffffff;
+}
+
+.flex-box {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    background: #26292e;
+    font-family: 'Roboto', sans-serif;
+}
+
