@@ -1,3 +1,12 @@
+:root {
+    --background-color: #26292e;
+    /* --bs-primary-rgb: #672222; */
+}
+
+.selector {
+	box-shadow: none; /* remove box shadow */
+}
+
 * {
     color: #ffffff;
 }
@@ -8,7 +17,19 @@
 }
 
 body {
-    background: #26292e;
+    background: var(--background-color);
     font-family: 'Roboto', sans-serif;
+}
+
+input[type="text"] {
+    background-color: var(--background-color);
+    color: #ffffff;
+    width: 30%;
+    height: 30%;
+    font-size: 25px;
+    border-style: solid;
+    border-color: aquamarine;
+    border-width: 10px;
+    border-radius: 5px;
 }
 

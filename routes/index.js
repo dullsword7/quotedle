@@ -7,5 +7,6 @@ const mainController = require('../controllers/mainController');
  */
 
 router.get('/', mainController.homepage);
+router.get('/check', mainController.check);
 
 module.exports = router;
