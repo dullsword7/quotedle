@@ -11,3 +11,11 @@
         <input type="submit" value="Send" accesskey="s" hidden />
     </div>
 </form>
+
+<div class="flex-box">
+    <% if (guesses.length != 0) { %>
+        <% guesses.forEach(function(guess, index) { %>
+            <div class="flex-box><%= guess %></div>
+        <% }) %>
+    <% } %>
+</div>

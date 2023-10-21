@@ -1,22 +1,39 @@
+const guesses = [];
 /**
  * GET /
  * Homepage
  */
 
 exports.homepage = async(req, res) => {
-    const locals = {
-        title: 'Quotedle',
-        description: 'Quote Guessing Game'
-    }
+    try {
+        const locals = {
+            title: 'Quotedle',
+            description: 'Quote Guessing Game'
+        }
 
-    res.render('index.ejs', locals);
+        res.render('index.ejs', {
+            guesses,
+            locals,
+            layout: "../views/layouts/main.ejs"
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
+/**
+ * POST /
+ * Homepage
+ */
 exports.check = async(req, res) => {
-    const locals = {
-        title: 'check',
-        description: 'checking guess'
+    try {
+        guesses.push(req.body.guessTerm);
+        res.render('index.ejs', {
+            guesses,
+            layout: "../views/layouts/main.ejs"
+        });
+        console.log(guesses);
+    } catch (error) {
+        console.log(error);
     }
-    console.log(req.body.guessTerm);
-    res.render('index.ejs', locals);
 }
