@@ -1,4 +1,5 @@
 const guesses = [];
+const fetch = require('node-fetch');
 /**
  * GET /
  * Homepage
@@ -6,6 +7,10 @@ const guesses = [];
 
 exports.homepage = async(req, res) => {
     try {
+        const quoteObj = await fetch("https://animechan.xyz/api/random")
+            .then((response) => response.json())
+            .then();
+
         const locals = {
             title: 'Quotedle',
             description: 'Quote Guessing Game'
@@ -14,6 +19,7 @@ exports.homepage = async(req, res) => {
         res.render('index.ejs', {
             guesses,
             locals,
+            quoteObj,
             layout: "../views/layouts/main.ejs"
         });
     } catch (error) {
@@ -28,10 +34,7 @@ exports.homepage = async(req, res) => {
 exports.check = async(req, res) => {
     try {
         guesses.push(req.body.guessTerm);
-        res.render('index.ejs', {
-            guesses,
-            layout: "../views/layouts/main.ejs"
-        });
+        res.redirect('/');
         console.log(guesses);
     } catch (error) {
         console.log(error);
