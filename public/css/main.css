@@ -56,3 +56,12 @@ input[type="text"] {
     width: 50%;
     margin: 20px;
 }
+
+.play-again-button {
+    background-color: #80858d;
+    padding: 25px;
+    border-width: 10px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+}

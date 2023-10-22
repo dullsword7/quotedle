@@ -8,5 +8,7 @@ const mainController = require('../controllers/mainController');
 
 router.get('/', mainController.homepage);
 router.post('/check', mainController.check);
+router.get('/success', mainController.successfulGuess);
+router.get('/playAgain', mainController.playAgain);
 
 module.exports = router;
