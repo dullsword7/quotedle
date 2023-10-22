@@ -51,3 +51,8 @@ input[type="text"] {
     border-color: gold;
 }
 
+.quote-box {
+    font-size: 30px;
+    width: 50%;
+    margin: 20px;
+}
