@@ -5,17 +5,17 @@
 <form action="/check" method="POST">
     <div class="flex-box">
         <label for="example"></label>
-        <input id="example" type="text" name="guessTerm" autocomplete="off" placeholder="Guess..."/>
+        <input id="guess-input" type="text" name="guessTerm" autocomplete="off" placeholder="Guess..."/>
     </div>
     <div>
         <input type="submit" value="Send" accesskey="s" hidden />
     </div>
 </form>
 
-<div class="flex-box">
+<div class="guess-list">
     <% if (guesses.length != 0) { %>
         <% guesses.forEach(function(guess, index) { %>
-            <div class="flex-box><%= guess %></div>
+            <div class="guess-item"><%= guess %></div>
         <% }) %>
     <% } %>
 </div>
