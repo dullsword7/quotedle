@@ -1,14 +1,11 @@
 <div class="flex-box">
-    <h1>Can you guess who said this quote?</h1>
-</div>
-<div class="flex-box">
     <div class="quote-box"><%= quoteObj.quote %></div>
 </div>
 
 <form action="/check" method="POST">
     <div class="flex-box">
         <label for="example"></label>
-        <input id="guess-input" type="text" name="guessTerm" autocomplete="off" placeholder="Guess..."/>
+        <input id="guess-input" type="text" name="guessTerm" autocomplete="off" placeholder="Guess..." readonly/>
     </div>
     <div>
         <input type="submit" value="Send" accesskey="s" hidden />
@@ -26,4 +23,14 @@
             <% } %>
         <% }) %>
     <% } %>
+</div>
+
+<div class="flex-box">
+    <div style="font-size: 200px;">SUCCESS</div>
+</div>
+
+<div class="flex-box">
+    <a href="/playAgain">
+        <button class="play-again-button">Want a new quote?</button>
+    </a>
 </div>

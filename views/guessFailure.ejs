@@ -15,7 +15,7 @@
 <div class="guess-list">
     <% if (guesses.length != 0) { %>
         <% guesses.forEach(function(guess, index) { %>
-            <% if (guess == quoteObj.character) { %>
+            <% if (quoteObj.acceptableAnswers.includes(guess)) { %>
                 <div class="guess-item" style="background-color: green"><%= guess %></div>
 
             <% } else { %>
@@ -26,7 +26,10 @@
 </div>
 
 <div class="flex-box">
-    <div style="font-size: 200px;">SUCCESS</div>
+    <div style="font-size: 100px;">The correct answer was</div>
+</div>
+<div class="flex-box">
+    <div style="font-size: 150px; font-weight: 900;"><%= quoteObj.character %></div>
 </div>
 
 <div class="flex-box">
