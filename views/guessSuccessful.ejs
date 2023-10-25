@@ -16,7 +16,7 @@
     <% if (guesses.length != 0) { %>
         <% guesses.forEach(function(guess, index) { %>
             <% if (quoteObj.acceptableAnswers.includes(guess)) { %>
-                <div class="guess-item" style="background-color: green"><%= guess %></div>
+                <div class="guess-item animate__animated animate__tada" style="background-color: green"><%= guess %></div>
 
             <% } else { %>
                 <div class="guess-item" style="background-color: red"><%= guess %></div>
