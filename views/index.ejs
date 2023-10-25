@@ -1,6 +1,6 @@
 <script src="scripts/hacker.js"></script>
 <div class="flex-box">
-    <h1 class="name" onload="changeColor()">Can you guess who said this quote?</h1>
+    <h1 class="name" onload="changeColor()">CAN YOU GUESS WHO SAID THIS QUOTE?</h1>
 </div>
 <div class="flex-box">
     <div class="quote-box"><%= quoteObj.quote %></div>
@@ -20,7 +20,7 @@
     <% if (guesses.length != 0) { %>
         <% guesses.forEach(function(guess, index) { %>
             <% if (quoteObj.acceptableAnswers.includes(guess)) { %>
-                <div class="guess-item" style="background-color: green"><%= guess %></div>
+                <div class="guess-item" style="background-color: greenyellow"><%= guess %></div>
 
             <% } else { %>
                 <div class="guess-item" style="background-color: red"><%= guess %></div>
