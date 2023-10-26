@@ -1,12 +1,12 @@
 // window.onload = function changeColor() {
 //    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-//    var a = document.querySelector(".name");
-//    var temp =  a.innerText.toString();
+//    var hint1 = document.querySelector(".name");
+//    var temp =  hint1.innerText.toString();
 //    console.log(temp);
 //    let iterations = 0;
 
 //    const interval = setInterval(() => {
-//       a.innerText = a.innerText.split("")
+//       hint1.innerText = hint1.innerText.split("")
 //          .map((letter, index) => {
 //             if (index < iterations) {
 //                return temp[index];
@@ -22,43 +22,44 @@
 // }
 
 function displayHintOne() {
-    var a = document.querySelector("#display-hint-1");
-    var b = document.querySelector("#display-hint-2");
-    var c = document.querySelector(".tooltip-1");
+    var hint1 = document.querySelector("#display-hint-1");
+    var hint2 = document.querySelector("#display-hint-2");
+    var tooltip1 = document.querySelector(".tooltip-1");
 
-    if (a.style.display !== 'none') {
-        a.style.display = 'none';
+    if (hint1.style.display !== 'none') {
+        hint1.style.display = 'none';
         borderFix('10px');
     } else {
-        a.style.display = 'block';
+        hint1.style.display = 'block';
         borderFix('10px 10px 0px 0px');
     }
 
-    if (b.style.display !== 'none') {
-        b.style.display = 'none';
+    if (hint2.style.display !== 'none') {
+        hint2.style.display = 'none';
     }
-    c.style.visibility = 'hidden';
+    tooltip1.style.visibility = 'hidden';
 }
 
 function displayHintTwo() {
-    var a = document.querySelector("#display-hint-1");
-    var b = document.querySelector("#display-hint-2");
-    var c = document.querySelector(".tooltip-2");
+    var hint1 = document.querySelector("#display-hint-1");
+    var hint2 = document.querySelector("#display-hint-2");
+    var tooltip2 = document.querySelector(".tooltip-2");
 
-    if (b.style.display !== 'none') {
-        b.style.display = 'none';
+    if (hint2.style.display !== 'none') {
+        hint2.style.display = 'none';
         borderFix('10px');
     } else {
-        b.style.display = 'block';
+        hint2.style.display = 'block';
         borderFix('10px 10px 0px 0px');
     }
 
-    if (a.style.display !== 'none') {
-        a.style.display = 'none';
+    if (hint1.style.display !== 'none') {
+        hint1.style.display = 'none';
     }
-    c.style.visibility = 'hidden';
+    tooltip2.style.visibility = 'hidden';
 }
 
+// Fixes border radius when hint box is opened
 function borderFix(radius) {
     var x = document.querySelector(".hint-box");
     x.style.borderRadius = radius;

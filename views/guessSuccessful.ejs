@@ -8,7 +8,7 @@
         <input id="guess-input" type="text" name="guessTerm" autocomplete="off" placeholder="Guess..." readonly/>
     </div>
     <div>
-        <input type="submit" value="Send" accesskey="s" hidden />
+        <input type="submit" value="Send" accesskey="s" hidden disabled/>
     </div>
 </form>
 
@@ -17,7 +17,6 @@
         <% guesses.forEach(function(guess, index) { %>
             <% if (quoteObj.acceptableAnswers.includes(guess)) { %>
                 <div class="guess-item animate__animated animate__tada" style="background-color: green"><%= guess %></div>
-
             <% } else { %>
                 <div class="guess-item" style="background-color: red"><%= guess %></div>
             <% } %>

@@ -6,6 +6,8 @@ var quoteObj = {
     quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
 }
 var wrongGuessCount = 0;
+var hint1 = false;
+var hint2 = false;
 // var quoteObj = {};
 var start = true;
 
@@ -64,6 +66,8 @@ exports.homepage = async(req, res) => {
             locals,
             guesses,
             quoteObj,
+            hint1,
+            hint2,
             layout: "../views/layouts/main.ejs"
         });
     } catch (error) {
@@ -75,22 +79,26 @@ exports.homepage = async(req, res) => {
  * POST /
  * Homepage
  */
-exports.check = async(req, res, next) => {
+exports.check = async(req, res) => {
     try {
         characterGuess = req.body.guessTerm.toLowerCase();
-        guesses.push(req.body.guessTerm);
+        guesses.unshift(req.body.guessTerm);
 
         // If the character guess is correct, redirect to success page
         if (quoteObj.acceptableAnswers.includes(characterGuess)) {
             res.redirect('/success');
         } else {
             wrongGuessCount += 1;
-            if (wrongGuessCount >= 3) {
+            if (wrongGuessCount >= 6) {
                 res.redirect('/failure');
             }
-            else {
-                res.redirect('/');
+            if (wrongGuessCount >= 4) {
+                hint2 = true;
             }
+            if (wrongGuessCount >= 2) {
+                hint1 = true;
+            }
+            res.redirect('/');
         }
         console.log(guesses);
     } catch (error) {
@@ -130,7 +138,9 @@ exports.guessFailure = async(req, res) => {
 
 exports.playAgain = async(req, res) => {
     guesses = [];
-    wrongGuessCount = 0
+    wrongGuessCount = 0;
+    hint1 = false;
+    hint2 = false;
 
     // quoteObj = await fetch("https://animechan.xyz/api/random")
     //     .then((response) => response.json())
