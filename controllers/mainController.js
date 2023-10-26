@@ -1,12 +1,12 @@
 const fetch = require('node-fetch');
 var guesses = [];
-var quoteObj = {
-    anime: 'one piece',
-    character: 'jwbrowning',
-    quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
-}
+// var quoteObj = {
+//     anime: 'one piece',
+//     character: 'jwbrowning',
+//     quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
+// }
 var wrongGuessCount = 0;
-// var quoteObj = {};
+var quoteObj = {};
 var start = true;
 
 /**
@@ -19,16 +19,17 @@ exports.homepage = async(req, res) => {
 
         // Handles initializing the quote for the first time only
         if (start) {
-            // quoteObj = await fetch("https://animechan.xyz/api/random")
-            //     .then((response) => response.json())
-            //     .then()
-            //     .catch(error => console.log(quoteObj));
+            quoteObj = await fetch("https://animechan.xyz/api/random")
+                .then((response) => response.json())
+                .then()
+                .catch(error => console.log(quoteObj));
 
             // Splits the character's name on white spaces into an array
             var nameArray = quoteObj.character.split(/\b\s+/);
 
             // Convert every word to lower case
             quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
+            quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
 
             console.log(`Character: ${quoteObj.character}`);
             console.log(`Anime: ${quoteObj.anime}`);
@@ -112,16 +113,17 @@ exports.playAgain = async(req, res) => {
     guesses = [];
     wrongGuessCount = 0
 
-    // quoteObj = await fetch("https://animechan.xyz/api/random")
-    //     .then((response) => response.json())
-    //     .then()
-    //     .catch(error => console.log(quoteObj));
+    quoteObj = await fetch("https://animechan.xyz/api/random")
+        .then((response) => response.json())
+        .then()
+        .catch(error => console.log(quoteObj));
 
     // Splits the character's name on white spaces into an array
     var nameArray = quoteObj.character.split(/\b\s+/);
 
     // Convert every word to lower case
     quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
+    quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
 
     console.log(`Character: ${quoteObj.character}`);
     console.log(`Anime: ${quoteObj.anime}`);
