@@ -82,34 +82,35 @@ input[type="text"] {
     animation-duration: 2s;
 }
 
-.hint-box {
-    border-radius: 10px;
-    border-color: gold;
+.d-border {
     border-style: solid;
-    width: 20%;
-    background-color: #80858d;
-    min-height: 100px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    justify-content: space-evenly;
+    border-color: gold;
+    border-radius: 10px;
+    width: 30%;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.hint-button {
-    font-size: 20px;
-    margin: 10px;
+.hint-box {
     background-color: #26292e;
-    padding: 25px;
+    width: 100%;
+    height: 100px;
 }
 
 #display-hint-1, #display-hint-2 {
+    background-color: #383d44;
+    width: 100%;
+    height: auto;
     font-family: 'Poppins', sans-serif;
-    font-size: 25px;
+    font-size: 30px;
     text-align: center;
-    vertical-align: middle;
-    line-height: 100px;
-    width: 20%;
+    padding: 25px;
+}
+
+.hint-button {
     background-color: #26292e;
-    height: 100px;
-    margin-top: -10px;
-    z-index: -1;
+    height: 50px;
+    margin: 25px;
+    font-size: 20px;
+    padding: 10px;
 }
