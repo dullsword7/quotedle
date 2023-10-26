@@ -18,8 +18,15 @@
     <div class="d-border">
         <div class="flex-box">
             <div class="flex-box hint-box">
-                <button class="hint-button hint-1" onclick="displayHintOne()">Show Hint</button>
-                <button class="hint-button hint-2" onclick="displayHintTwo()">Name Hint</button>
+                <div class="tooltip">
+                    <button class="hint-button hint-1" onmouseenter="showToolTip('tip-1')" onmouseleave="hideToolTip('tip-1')" onclick="displayHintOne()">Show Hint</button>
+                    <span id="tip-1" class="tooltiptext tooltip-1">Reveal the show of the character</span>
+                </div>
+                <div class="tooltip">
+                    <button class="hint-button hint-2" onmouseenter="showToolTip('tip-2')" onmouseleave="hideToolTip('tip-2')"onclick="displayHintTwo()">Name Hint</button>
+                    <span id="tip-2" class="tooltiptext tooltip-2">Reveal half of the character's name</span>
+                </div>
+
             </div>
         </div>
         <div class="flex-box">
