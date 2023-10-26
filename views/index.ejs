@@ -2,6 +2,18 @@
 <div class="flex-box">
     <h1 class="name" onload="changeColor()">CAN YOU GUESS WHO SAID THIS QUOTE?</h1>
 </div>
+
+<div class="flex-box">
+    <div class="flex-box hint-box">
+        <button class="hint-button hint-1" onclick="displayHintOne()">Show Hint</button>
+        <button class="hint-button hint-2" onclick="displayHintTwo()">Name Hint</button>
+    </div>
+</div>
+<div class="flex-box">
+    <div id="display-hint-1" style="display: none"><%= quoteObj.anime %></div>
+    <div id="display-hint-2" style="display: none"><%= quoteObj.hintString %></div>
+</div>
+
 <div class="flex-box">
     <div class="quote-box"><%= quoteObj.quote %></div>
 </div>

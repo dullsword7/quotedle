@@ -81,3 +81,35 @@ input[type="text"] {
 .animate__headShake {
     animation-duration: 2s;
 }
+
+.hint-box {
+    border-radius: 10px;
+    border-color: gold;
+    border-style: solid;
+    width: 20%;
+    background-color: #80858d;
+    min-height: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    justify-content: space-evenly;
+}
+
+.hint-button {
+    font-size: 20px;
+    margin: 10px;
+    background-color: #26292e;
+    padding: 25px;
+}
+
+#display-hint-1, #display-hint-2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+    width: 20%;
+    background-color: #26292e;
+    height: 100px;
+    margin-top: -10px;
+    z-index: -1;
+}

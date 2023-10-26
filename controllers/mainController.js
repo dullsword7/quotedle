@@ -30,6 +30,26 @@ exports.homepage = async(req, res) => {
             // Convert every word to lower case
             quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
 
+            // Create a hint string randomly inserting '_'
+            var characterName = quoteObj.character;
+            randomNumberArray = []
+            for (let index = 0; index < characterName.length / 2 + 1; index++) {
+                randomNumberArray.push(Math.floor(Math.random() * characterName.length));
+            }
+
+            hintString = "";
+            for (let index = 0; index < characterName.length; index++) {
+                // If current character is not an empty space and the index is in the array of random numbers
+                if ((characterName[index] != " ") && randomNumberArray.includes(index)) {
+                    hintString += '_';
+                }
+                else {
+                    hintString += characterName[index];
+                }
+            }
+            quoteObj.hintString = hintString;
+            console.log(hintString);
+
             console.log(`Character: ${quoteObj.character}`);
             console.log(`Anime: ${quoteObj.anime}`);
             start = false;
@@ -55,7 +75,7 @@ exports.homepage = async(req, res) => {
  * POST /
  * Homepage
  */
-exports.check = async(req, res) => {
+exports.check = async(req, res, next) => {
     try {
         characterGuess = req.body.guessTerm.toLowerCase();
         guesses.push(req.body.guessTerm);
