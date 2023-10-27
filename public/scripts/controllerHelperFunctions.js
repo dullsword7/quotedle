@@ -25,6 +25,7 @@ function fetchUrl(gameMode) {
 }
 
 function processQuoteObj(quoteObj, gameMode) {
+    console.log(quoteObj);
     if (gameMode == 'game+of+thrones') {
         return {
             show: "Game of Thrones",

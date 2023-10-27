@@ -47,7 +47,6 @@ exports.homepage = async(req, res) => {
             quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
 
             helpers.generateHintString(quoteObj.character, quoteObj);
-
             console.log(`Character: ${quoteObj.character}`);
             console.log(`Anime: ${quoteObj.show}`);
             start = false;
@@ -150,6 +149,7 @@ exports.playAgain = async(req, res) => {
     // Convert every word to lower case
     quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
     quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
+
 
     helpers.generateHintString(quoteObj.character, quoteObj);
 
