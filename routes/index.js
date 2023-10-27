@@ -12,5 +12,7 @@ router.get('/success', mainController.guessSuccessful);
 router.get('/failure', mainController.guessFailure);
 router.get('/playAgain', mainController.playAgain);
 router.post('/changeMode', mainController.changeMode);
+router.post('/changeToAnime', mainController.changeToAnime);
+router.post('/changeToShows', mainController.changeToShows);
 
 module.exports = router;

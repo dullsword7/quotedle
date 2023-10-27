@@ -4,16 +4,34 @@
     <div class="game-mode-holder">
         <form action="/changeMode" method="POST">
             <select name="gameMode" class="game-mode-selection" onchange="this.form.submit()">
-                <option selected disabled hidden>Choose a show</option>
-                <option value="random">Random</option>
-                <option value="one+piece">One Piece</option>
-                <option value="naruto">Naruto</option>
+                <% if (animeToggled) { %>
+                    <option selected disabled hidden>Choose an anime</option>
+                    <option value="random">Random</option>
+                    <option value="one+piece">One Piece</option>
+                    <option value="naruto">Naruto</option>
+                <% } else { %>
+                    <option selected disabled hidden>Choose a show</option>
+                    <option value="game+of+thrones">Game of Thrones</option>
+                    <option value="breaking+bad">Breaking Bad</option>
+                <% } %>
             </select>
         </form>
     </div>
     <div class="toggle-anime-western-shows">
-        <button class="toggle-button toggle-anime" onclick="toggleButton('toggle-anime')" disabled>Anime</button>
-        <button class="toggle-button toggle-shows" onclick="toggleButton('toggle-shows')">Shows</button>
+        <form action="/changeToAnime" method="POST">
+            <% if (animeToggled) { %>
+                <button class="toggle-button toggle-anime" disabled>Anime</button>
+            <% } else { %>
+                <button class="toggle-button toggle-anime">Anime</button>
+            <% } %>
+        </form>
+        <form action="/changeToShows" method="POST">
+            <% if (animeToggled) { %>
+                <button class="toggle-button toggle-shows">Shows</button>
+            <% } else { %>
+                <button class="toggle-button toggle-shows" disabled>Shows</button>
+            <% } %>
+        </form>
     </div>
 </div>
 

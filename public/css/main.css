@@ -162,12 +162,17 @@ button:not(:disabled) {
     font-size: 20px;
     width: 200px;
     padding: 10px;
+    cursor: pointer;
 }
+
 
 .toggle-anime-western-shows {
     position: absolute;
     top: 10%;
     right: 20%;
+    border: solid;
+    border-color: white;
+    border-width: 1px;
 }
 
 .toggle-button {
@@ -189,7 +194,16 @@ button:not(:disabled) {
 .toggle-anime {
     width: 100px;
     float: left;
+    border: solid;
+    border-color: white;
+    border-width: 1px;
 }
 .toggle-shows {
     width: 100px;
+    border: solid;
+    border-color: white;
+    border-width: 1px;
+}
+form {
+    display: inline;
 }

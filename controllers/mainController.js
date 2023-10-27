@@ -8,9 +8,18 @@ var quoteObj = {
 var wrongGuessCount = 0;
 var hint1 = false;
 var hint2 = false;
-// var quoteObj = {};
+
+var quoteObj = {
+    show: '',
+    character: '',
+    quote: '',
+    acceptableAnswers: [],
+    hintString: ''
+};
+
 var start = true;
 var gameMode = 'random';
+var animeToggled = true;
 
 /**
  * GET /
@@ -49,6 +58,7 @@ exports.homepage = async(req, res) => {
             quoteObj,
             hint1,
             hint2,
+            animeToggled,
             layout: "../views/layouts/main.ejs"
         });
     } catch (error) {
@@ -150,4 +160,24 @@ exports.changeMode = async(req, res) => {
     gameMode = req.body.gameMode;
 
     res.redirect('/playAgain');
+}
+
+/**
+ * POST /
+ * Change To Anime
+ */
+
+exports.changeToAnime = async(req, res) => {
+    animeToggled = true;
+    res.redirect('/');
+
+}
+
+/**
+ * POST /
+ * Change To Shows
+ */
+exports.changeToShows = async(req, res) => {
+    animeToggled = false;
+    res.redirect('/');
 }

@@ -6,15 +6,26 @@ exports.fetchQuoteObject = async (gameMode) => {
         .then((response) => response.json())
         .then()
         .catch(error => console.log(quoteObj));
-    return quoteObj;
+
+    // need to customize the quote object based on which api is used
+    processedQuoteObj = processQuoteObj(quoteObj, gameMode);
+
+    return processQuoteObj;
 }
 
 function fetchUrl(gameMode) {
     if (gameMode == 'random') {
         return 'https://animechan.xyz/api/random';
+    }
+    if (gameMode == 'game+of+thrones') {
+        return 'https://api.gameofthronesquotes.xyz/v1/random';
     } else {
         return 'https://animechan.xyz/api/random/anime?title=' + gameMode;
     }
+}
+
+function processedQuoteObj(quoteObj, gameMode) {
+
 }
 
 exports.generateHintString = (characterName, quoteObj) => {
