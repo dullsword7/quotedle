@@ -9,11 +9,17 @@ var wrongGuessCount = 0;
 var hint1 = false;
 var hint2 = false;
 
+// My custom quote object
 var quoteObj = {
+    // name of the show the quote came from
     show: '',
+    // character who said the quote
     character: '',
+    // the actual quote
     quote: '',
+    // an array of all answers that will redirect to success
     acceptableAnswers: [],
+    // string with half of the character's name
     hintString: ''
 };
 
@@ -31,7 +37,7 @@ exports.homepage = async(req, res) => {
 
         // Handles initializing the quote for the first time only
         if (start) {
-            // quoteObj = await helpers.fetchQuoteObject(gameMode);
+            quoteObj = await helpers.fetchQuoteObject(gameMode);
 
             // Splits the character's name on white spaces into an array
             var nameArray = quoteObj.character.split(" ");
@@ -43,7 +49,7 @@ exports.homepage = async(req, res) => {
             helpers.generateHintString(quoteObj.character, quoteObj);
 
             console.log(`Character: ${quoteObj.character}`);
-            console.log(`Anime: ${quoteObj.anime}`);
+            console.log(`Anime: ${quoteObj.show}`);
             start = false;
         }
 
@@ -136,7 +142,7 @@ exports.playAgain = async(req, res) => {
     hint1 = false;
     hint2 = false;
 
-    // quoteObj = await helpers.fetchQuoteObject(gameMode);
+    quoteObj = await helpers.fetchQuoteObject(gameMode);
 
     // Splits the character's name on white spaces into an array
     var nameArray = quoteObj.character.split(" ");
@@ -148,7 +154,7 @@ exports.playAgain = async(req, res) => {
     helpers.generateHintString(quoteObj.character, quoteObj);
 
     console.log(`Character: ${quoteObj.character}`);
-    console.log(`Anime: ${quoteObj.anime}`);
+    console.log(`Anime: ${quoteObj.show}`);
     res.redirect('/');
 }
 
@@ -169,7 +175,7 @@ exports.changeMode = async(req, res) => {
 
 exports.changeToAnime = async(req, res) => {
     animeToggled = true;
-    res.redirect('/');
+    res.redirect('/playAgain');
 
 }
 
@@ -179,5 +185,6 @@ exports.changeToAnime = async(req, res) => {
  */
 exports.changeToShows = async(req, res) => {
     animeToggled = false;
-    res.redirect('/');
+    gameMode = 'game+of+thrones';
+    res.redirect('/playAgain');
 }

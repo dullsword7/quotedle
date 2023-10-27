@@ -10,7 +10,7 @@ exports.fetchQuoteObject = async (gameMode) => {
     // need to customize the quote object based on which api is used
     processedQuoteObj = processQuoteObj(quoteObj, gameMode);
 
-    return processQuoteObj;
+    return processedQuoteObj;
 }
 
 function fetchUrl(gameMode) {
@@ -24,8 +24,25 @@ function fetchUrl(gameMode) {
     }
 }
 
-function processedQuoteObj(quoteObj, gameMode) {
-
+function processQuoteObj(quoteObj, gameMode) {
+    if (gameMode == 'game+of+thrones') {
+        return {
+            show: "Game of Thrones",
+            character: quoteObj.character.name,
+            quote: quoteObj.sentence,
+            acceptableAnswers: [],
+            hintString: ''
+        };
+    // fetched from animechan.xyz
+    } else {
+        return {
+            show: quoteObj.anime,
+            character: quoteObj.character,
+            quote: quoteObj.quote,
+            acceptableAnswers: [],
+            hintString: ''
+        }
+    }
 }
 
 exports.generateHintString = (characterName, quoteObj) => {
