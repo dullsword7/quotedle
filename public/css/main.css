@@ -113,6 +113,10 @@ input[type="text"] {
     border-bottom-left-radius: 10px;
 }
 
+button:not(:disabled) {
+    cursor:pointer;
+}
+
 .hint-button {
     background-color: #26292e;
     height: 50px;
@@ -142,6 +146,50 @@ input[type="text"] {
     display: inline-block;
 }
 
-button:disabled {
+.hint-button:disabled {
     opacity: 50%;
+}
+
+.game-mode-holder {
+    display: flex;
+    position: absolute;
+    top: 3%;
+    right: 20%;
+}
+
+.game-mode-selection {
+    background-color: #383d44;
+    font-size: 20px;
+    width: 200px;
+    padding: 10px;
+}
+
+.toggle-anime-western-shows {
+    position: absolute;
+    top: 10%;
+    right: 20%;
+}
+
+.toggle-button {
+    background-color: #383d44;
+    position: relative;
+    font-size: 20px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    box-shadow: inset 2px 2px 3px #838383;
+}
+
+.toggle-button:disabled {
+    background: #666666;
+    outline: none;
+    box-shadow: inset 5px 5px 5px #4e4e4e;
+}
+
+.toggle-anime {
+    width: 100px;
+    float: left;
+}
+.toggle-shows {
+    width: 100px;
 }

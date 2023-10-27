@@ -1,15 +1,16 @@
-const fetch = require('node-fetch');
+const helpers = require('../public/scripts/controllerHelperFunctions');
 var guesses = [];
-// var quoteObj = {
-//     anime: 'one piece',
-//     character: 'jwbrowning',
-//     quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
-// }
+var quoteObj = {
+    anime: 'One Piece',
+    character: 'Jwbrowning',
+    quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
+}
 var wrongGuessCount = 0;
 var hint1 = false;
 var hint2 = false;
-var quoteObj = {};
+// var quoteObj = {};
 var start = true;
+var gameMode = 'random';
 
 /**
  * GET /
@@ -21,10 +22,7 @@ exports.homepage = async(req, res) => {
 
         // Handles initializing the quote for the first time only
         if (start) {
-            quoteObj = await fetch("https://animechan.xyz/api/random")
-                .then((response) => response.json())
-                .then()
-                .catch(error => console.log(quoteObj));
+            // quoteObj = await helpers.fetchQuoteObject(gameMode);
 
             // Splits the character's name on white spaces into an array
             var nameArray = quoteObj.character.split(" ");
@@ -33,7 +31,7 @@ exports.homepage = async(req, res) => {
             quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
             quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
 
-            generateHintString(quoteObj.character);
+            helpers.generateHintString(quoteObj.character, quoteObj);
 
             console.log(`Character: ${quoteObj.character}`);
             console.log(`Anime: ${quoteObj.anime}`);
@@ -128,10 +126,7 @@ exports.playAgain = async(req, res) => {
     hint1 = false;
     hint2 = false;
 
-    quoteObj = await fetch("https://animechan.xyz/api/random")
-        .then((response) => response.json())
-        .then()
-        .catch(error => console.log(quoteObj));
+    // quoteObj = await helpers.fetchQuoteObject(gameMode);
 
     // Splits the character's name on white spaces into an array
     var nameArray = quoteObj.character.split(" ");
@@ -140,31 +135,19 @@ exports.playAgain = async(req, res) => {
     quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
     quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
 
-    generateHintString(quoteObj.character);
+    helpers.generateHintString(quoteObj.character, quoteObj);
 
     console.log(`Character: ${quoteObj.character}`);
     console.log(`Anime: ${quoteObj.anime}`);
     res.redirect('/');
 }
 
-function generateHintString(characterName) {
-    // Create a hint string randomly inserting '_'
-    randomNumberArray = []
-    for (let index = 0; index < characterName.length / 2 + 1; index++) {
-        randomNumberArray.push(Math.floor(Math.random() * characterName.length));
-    }
+/**
+ * POST /
+ * Change Mode
+ */
+exports.changeMode = async(req, res) => {
+    gameMode = req.body.gameMode;
 
-    hintString = "";
-    for (let index = 0; index < characterName.length; index++) {
-        // If current character is not an empty space and the index is in the array of random numbers
-        if ((characterName[index] != " ") && randomNumberArray.includes(index)) {
-            hintString += '_';
-        }
-        else {
-            hintString += characterName[index];
-        }
-    }
-    hintString = hintString.replace(" ", "\xa0\xa0\xa0");
-    quoteObj.hintString = hintString;
-    console.log(hintString);
+    res.redirect('/playAgain');
 }

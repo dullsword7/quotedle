@@ -11,5 +11,6 @@ router.post('/check', mainController.check);
 router.get('/success', mainController.guessSuccessful);
 router.get('/failure', mainController.guessFailure);
 router.get('/playAgain', mainController.playAgain);
+router.post('/changeMode', mainController.changeMode);
 
 module.exports = router;

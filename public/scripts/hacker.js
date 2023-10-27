@@ -74,3 +74,15 @@ function hideToolTip(element) {
     var x = document.getElementById(element);
     x.style.visibility = 'hidden';
 }
+
+function toggleButton(toggle) {
+    var animeToggle = document.querySelector(".toggle-anime");
+    var showsToggle = document.querySelector(".toggle-shows");
+    if (toggle == 'toggle-anime') {
+        animeToggle.disabled = true;
+        showsToggle.disabled = false;
+    } else {
+        animeToggle.disabled = false;
+        showsToggle.disabled = true;
+    }
+}
