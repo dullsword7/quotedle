@@ -9,16 +9,16 @@ exports.fetchQuoteObject = async (gameMode) => {
 
     // need to customize the quote object based on which api is used
     processedQuoteObj = processQuoteObj(quoteObj, gameMode);
-
     return processedQuoteObj;
 }
 
 function fetchUrl(gameMode) {
     if (gameMode == 'random') {
         return 'https://animechan.xyz/api/random';
-    }
-    if (gameMode == 'game+of+thrones') {
+    } else if (gameMode == 'game+of+thrones') {
         return 'https://api.gameofthronesquotes.xyz/v1/random';
+    } else if (gameMode == 'breaking+bad') {
+        return 'https://api.breakingbadquotes.xyz/v1/quotes';
     } else {
         return 'https://animechan.xyz/api/random/anime?title=' + gameMode;
     }
@@ -33,8 +33,17 @@ function processQuoteObj(quoteObj, gameMode) {
             acceptableAnswers: [],
             hintString: ''
         };
-    // fetched from animechan.xyz
+    }
+    else if (gameMode == 'breaking+bad') {
+        return {
+            show: "Breaking Bad",
+            character: quoteObj[0].author,
+            quote: quoteObj[0].quote,
+            acceptableAnswers: [],
+            hintString: ''
+        };
     } else {
+        // fetched from animechan.xyz
         return {
             show: quoteObj.anime,
             character: quoteObj.character,
