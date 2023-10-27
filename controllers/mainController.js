@@ -1,14 +1,14 @@
 const fetch = require('node-fetch');
 var guesses = [];
-var quoteObj = {
-    anime: 'one piece',
-    character: 'jwbrowning',
-    quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
-}
+// var quoteObj = {
+//     anime: 'one piece',
+//     character: 'jwbrowning',
+//     quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
+// }
 var wrongGuessCount = 0;
 var hint1 = false;
 var hint2 = false;
-// var quoteObj = {};
+var quoteObj = {};
 var start = true;
 
 /**
@@ -21,10 +21,10 @@ exports.homepage = async(req, res) => {
 
         // Handles initializing the quote for the first time only
         if (start) {
-            // quoteObj = await fetch("https://animechan.xyz/api/random")
-            //     .then((response) => response.json())
-            //     .then()
-            //     .catch(error => console.log(quoteObj));
+            quoteObj = await fetch("https://animechan.xyz/api/random/anime?title=one+piece")
+                .then((response) => response.json())
+                .then()
+                .catch(error => console.log(quoteObj));
 
             // Splits the character's name on white spaces into an array
             var nameArray = quoteObj.character.split(/\b\s+/);
@@ -49,6 +49,7 @@ exports.homepage = async(req, res) => {
                     hintString += characterName[index];
                 }
             }
+            hintString = hintString.replace(" ", "\xa0\xa0\xa0");
             quoteObj.hintString = hintString;
             console.log(hintString);
 
@@ -91,14 +92,16 @@ exports.check = async(req, res) => {
             wrongGuessCount += 1;
             if (wrongGuessCount >= 6) {
                 res.redirect('/failure');
+            } else {
+                if (wrongGuessCount >= 4) {
+                    hint2 = true;
+                }
+                if (wrongGuessCount >= 2) {
+                    hint1 = true;
+                }
+                res.redirect('/');
             }
-            if (wrongGuessCount >= 4) {
-                hint2 = true;
-            }
-            if (wrongGuessCount >= 2) {
-                hint1 = true;
-            }
-            res.redirect('/');
+
         }
         console.log(guesses);
     } catch (error) {
@@ -142,16 +145,36 @@ exports.playAgain = async(req, res) => {
     hint1 = false;
     hint2 = false;
 
-    // quoteObj = await fetch("https://animechan.xyz/api/random")
-    //     .then((response) => response.json())
-    //     .then()
-    //     .catch(error => console.log(quoteObj));
+    quoteObj = await fetch("https://animechan.xyz/api/random/anime?title=one+piece")
+        .then((response) => response.json())
+        .then()
+        .catch(error => console.log(quoteObj));
 
     // Splits the character's name on white spaces into an array
     var nameArray = quoteObj.character.split(/\b\s+/);
 
     // Convert every word to lower case
     quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
+
+    // Create a hint string randomly inserting '_'
+    var characterName = quoteObj.character;
+    randomNumberArray = []
+    for (let index = 0; index < characterName.length / 2 + 1; index++) {
+        randomNumberArray.push(Math.floor(Math.random() * characterName.length));
+    }
+
+    hintString = "";
+    for (let index = 0; index < characterName.length; index++) {
+        // If current character is not an empty space and the index is in the array of random numbers
+        if ((characterName[index] != " ") && randomNumberArray.includes(index)) {
+            hintString += '_';
+        }
+        else {
+            hintString += characterName[index];
+        }
+    }
+    quoteObj.hintString = hintString;
+    console.log(hintString);
 
     console.log(`Character: ${quoteObj.character}`);
     console.log(`Anime: ${quoteObj.anime}`);
