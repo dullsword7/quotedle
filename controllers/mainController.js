@@ -6,6 +6,8 @@ var guesses = [];
 //     quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
 // }
 var wrongGuessCount = 0;
+var hint1 = false;
+var hint2 = false;
 var quoteObj = {};
 var start = true;
 
@@ -25,11 +27,13 @@ exports.homepage = async(req, res) => {
                 .catch(error => console.log(quoteObj));
 
             // Splits the character's name on white spaces into an array
-            var nameArray = quoteObj.character.split(/\b\s+/);
+            var nameArray = quoteObj.character.split(" ");
 
             // Convert every word to lower case
             quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
             quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
+
+            generateHintString(quoteObj.character);
 
             console.log(`Character: ${quoteObj.character}`);
             console.log(`Anime: ${quoteObj.anime}`);
@@ -45,6 +49,8 @@ exports.homepage = async(req, res) => {
             locals,
             guesses,
             quoteObj,
+            hint1,
+            hint2,
             layout: "../views/layouts/main.ejs"
         });
     } catch (error) {
@@ -59,19 +65,25 @@ exports.homepage = async(req, res) => {
 exports.check = async(req, res) => {
     try {
         characterGuess = req.body.guessTerm.toLowerCase();
-        guesses.push(req.body.guessTerm);
+        guesses.unshift(req.body.guessTerm);
 
         // If the character guess is correct, redirect to success page
         if (quoteObj.acceptableAnswers.includes(characterGuess)) {
             res.redirect('/success');
         } else {
             wrongGuessCount += 1;
-            if (wrongGuessCount >= 3) {
+            if (wrongGuessCount >= 6) {
                 res.redirect('/failure');
-            }
-            else {
+            } else {
+                if (wrongGuessCount >= 4) {
+                    hint2 = true;
+                }
+                if (wrongGuessCount >= 2) {
+                    hint1 = true;
+                }
                 res.redirect('/');
             }
+
         }
         console.log(guesses);
     } catch (error) {
@@ -104,6 +116,7 @@ exports.guessFailure = async(req, res) => {
         layout: "../views/layouts/main.ejs"
     });
 }
+
 /**
  * GET /
  * Play Again Page
@@ -111,7 +124,9 @@ exports.guessFailure = async(req, res) => {
 
 exports.playAgain = async(req, res) => {
     guesses = [];
-    wrongGuessCount = 0
+    wrongGuessCount = 0;
+    hint1 = false;
+    hint2 = false;
 
     quoteObj = await fetch("https://animechan.xyz/api/random")
         .then((response) => response.json())
@@ -119,13 +134,37 @@ exports.playAgain = async(req, res) => {
         .catch(error => console.log(quoteObj));
 
     // Splits the character's name on white spaces into an array
-    var nameArray = quoteObj.character.split(/\b\s+/);
+    var nameArray = quoteObj.character.split(" ");
 
     // Convert every word to lower case
     quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
     quoteObj.acceptableAnswers.push(quoteObj.character.toLowerCase());
 
+    generateHintString(quoteObj.character);
+
     console.log(`Character: ${quoteObj.character}`);
     console.log(`Anime: ${quoteObj.anime}`);
     res.redirect('/');
+}
+
+function generateHintString(characterName) {
+    // Create a hint string randomly inserting '_'
+    randomNumberArray = []
+    for (let index = 0; index < characterName.length / 2 + 1; index++) {
+        randomNumberArray.push(Math.floor(Math.random() * characterName.length));
+    }
+
+    hintString = "";
+    for (let index = 0; index < characterName.length; index++) {
+        // If current character is not an empty space and the index is in the array of random numbers
+        if ((characterName[index] != " ") && randomNumberArray.includes(index)) {
+            hintString += '_';
+        }
+        else {
+            hintString += characterName[index];
+        }
+    }
+    hintString = hintString.replace(" ", "\xa0\xa0\xa0");
+    quoteObj.hintString = hintString;
+    console.log(hintString);
 }

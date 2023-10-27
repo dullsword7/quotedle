@@ -1,6 +1,42 @@
+<script src="scripts/hacker.js"></script>
 <div class="flex-box">
-    <h1>Can you guess who said this quote?</h1>
+    <h1 class="name" onload="changeColor()">CAN YOU GUESS WHO SAID THIS QUOTE?</h1>
 </div>
+
+<div class="flex-box">
+    <div class="d-border">
+        <div class="flex-box">
+            <div class="flex-box hint-box">
+                <div class="tooltip">
+                    <% if (hint1) { %>
+                        <button class="hint-button hint-1" onmouseenter="showToolTip('tip-1')" onmouseleave="hideToolTip('tip-1')"
+                            onclick="displayHintOne()">Show Hint</button>
+                    <% } else { %>
+                        <button class="hint-button hint-1" onmouseenter="showToolTip('tip-1')" onmouseleave="hideToolTip('tip-1')"
+                            onclick="displayHintOne()" disabled>Show Hint</button>
+                    <% } %>
+                    <span id="tip-1" class="tooltiptext tooltip-1">Reveal the show of the character</span>
+                </div>
+                <div class="tooltip">
+                    <% if (hint2) { %>
+                        <button class="hint-button hint-2" onmouseenter="showToolTip('tip-2')" onmouseleave="hideToolTip('tip-2')"
+                            onclick="displayHintTwo()">Name Hint</button>
+                    <% } else { %>
+                        <button class="hint-button hint-2" onmouseenter="showToolTip('tip-2')" onmouseleave="hideToolTip('tip-2')"
+                            onclick="displayHintTwo()" disabled>Name Hint</button>
+                    <% } %>
+                    <span id="tip-2" class="tooltiptext tooltip-2">Reveal half of the character's name</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="flex-box">
+            <div id="display-hint-1" style="display: none"><%= quoteObj.anime %></div>
+            <div id="display-hint-2" style="display: none"><%= quoteObj.hintString %></div>
+        </div>
+    </div>
+</div>
+
 <div class="flex-box">
     <div class="quote-box"><%= quoteObj.quote %></div>
 </div>
@@ -19,7 +55,7 @@
     <% if (guesses.length != 0) { %>
         <% guesses.forEach(function(guess, index) { %>
             <% if (quoteObj.acceptableAnswers.includes(guess)) { %>
-                <div class="guess-item" style="background-color: green"><%= guess %></div>
+                <div class="guess-item" style="background-color: greenyellow"><%= guess %></div>
 
             <% } else { %>
                 <div class="guess-item" style="background-color: red"><%= guess %></div>
