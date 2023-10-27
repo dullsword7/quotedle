@@ -27,31 +27,13 @@ exports.homepage = async(req, res) => {
                 .catch(error => console.log(quoteObj));
 
             // Splits the character's name on white spaces into an array
-            var nameArray = quoteObj.character.split(/\b\s+/);
+            var nameArray = quoteObj.character.split(" ");
 
             // Convert every word to lower case
             quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
+            quoteObj.acceptableAnswers.push(quoteObj.character);
 
-            // Create a hint string randomly inserting '_'
-            var characterName = quoteObj.character;
-            randomNumberArray = []
-            for (let index = 0; index < characterName.length / 2 + 1; index++) {
-                randomNumberArray.push(Math.floor(Math.random() * characterName.length));
-            }
-
-            hintString = "";
-            for (let index = 0; index < characterName.length; index++) {
-                // If current character is not an empty space and the index is in the array of random numbers
-                if ((characterName[index] != " ") && randomNumberArray.includes(index)) {
-                    hintString += '_';
-                }
-                else {
-                    hintString += characterName[index];
-                }
-            }
-            hintString = hintString.replace(" ", "\xa0\xa0\xa0");
-            quoteObj.hintString = hintString;
-            console.log(hintString);
+            generateHintString(quoteObj.character);
 
             console.log(`Character: ${quoteObj.character}`);
             console.log(`Anime: ${quoteObj.anime}`);
@@ -134,6 +116,7 @@ exports.guessFailure = async(req, res) => {
         layout: "../views/layouts/main.ejs"
     });
 }
+
 /**
  * GET /
  * Play Again Page
@@ -151,13 +134,22 @@ exports.playAgain = async(req, res) => {
         .catch(error => console.log(quoteObj));
 
     // Splits the character's name on white spaces into an array
-    var nameArray = quoteObj.character.split(/\b\s+/);
+    var nameArray = quoteObj.character.split(" ");
 
     // Convert every word to lower case
     quoteObj.acceptableAnswers = nameArray.map(x => x.toLowerCase());
+    quoteObj.acceptableAnswers.push(quoteObj.character);
 
+
+    generateHintString(quoteObj.character);
+
+    console.log(`Character: ${quoteObj.character}`);
+    console.log(`Anime: ${quoteObj.anime}`);
+    res.redirect('/');
+}
+
+function generateHintString(characterName) {
     // Create a hint string randomly inserting '_'
-    var characterName = quoteObj.character;
     randomNumberArray = []
     for (let index = 0; index < characterName.length / 2 + 1; index++) {
         randomNumberArray.push(Math.floor(Math.random() * characterName.length));
@@ -173,10 +165,7 @@ exports.playAgain = async(req, res) => {
             hintString += characterName[index];
         }
     }
+    hintString = hintString.replace(" ", "\xa0\xa0\xa0");
     quoteObj.hintString = hintString;
     console.log(hintString);
-
-    console.log(`Character: ${quoteObj.character}`);
-    console.log(`Anime: ${quoteObj.anime}`);
-    res.redirect('/');
 }
