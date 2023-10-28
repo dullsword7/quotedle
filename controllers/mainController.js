@@ -175,6 +175,7 @@ exports.changeMode = async(req, res) => {
 
 exports.changeToAnime = async(req, res) => {
     animeToggled = true;
+    gameMode = 'random';
     res.redirect('/playAgain');
 
 }

@@ -75,14 +75,14 @@ function hideToolTip(element) {
     x.style.visibility = 'hidden';
 }
 
-window.onload = function toggleButton() {
-    var animeToggle = document.querySelector(".toggle-anime");
-    var showsToggle = document.querySelector(".toggle-shows");
-    if (toggle == 'toggle-anime') {
-        animeToggle.disabled = true;
-        showsToggle.disabled = false;
-    } else {
-        animeToggle.disabled = false;
-        showsToggle.disabled = true;
-    }
-}
+// window.onload = function toggleButton() {
+//     var animeToggle = document.querySelector(".toggle-anime");
+//     var showsToggle = document.querySelector(".toggle-shows");
+//     if (toggle == 'toggle-anime') {
+//         animeToggle.disabled = true;
+//         showsToggle.disabled = false;
+//     } else {
+//         animeToggle.disabled = false;
+//         showsToggle.disabled = true;
+//     }
+// }
