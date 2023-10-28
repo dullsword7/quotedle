@@ -1,4 +1,2 @@
 /node_modules
 .env
-cypress
-cypress.config.js
