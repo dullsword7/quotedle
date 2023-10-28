@@ -77,6 +77,7 @@ exports.homepage = async(req, res) => {
  */
 exports.check = async(req, res) => {
     try {
+        console.log(quoteObj.acceptableAnswers);
         characterGuess = req.body.guessTerm.toLowerCase();
         guesses.unshift(req.body.guessTerm);
 
