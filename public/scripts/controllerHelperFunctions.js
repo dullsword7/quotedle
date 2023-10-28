@@ -72,7 +72,7 @@ exports.generateHintString = (characterName, quoteObj) => {
             hintString += characterName[index];
         }
     }
-    hintString = hintString.replace(" ", "\xa0\xa0\xa0");
+    hintString = hintString.replace(/ /g, "\xa0\xa0\xa0");
     quoteObj.hintString = hintString;
     console.log(hintString);
 }
