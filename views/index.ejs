@@ -46,6 +46,7 @@
                     <% } else { %>
                         <button class="hint-button hint-1" onmouseenter="showToolTip('tip-1')" onmouseleave="hideToolTip('tip-1')"
                             onclick="displayHintOne()" disabled>Show Hint</button>
+                            <div class="hint-unlock-count">Unlocks in <%=2 - guesses.length %> tries</div>
                     <% } %>
                     <span id="tip-1" class="tooltiptext tooltip-1">Reveal the show of the character</span>
                 </div>
@@ -56,10 +57,10 @@
                     <% } else { %>
                         <button class="hint-button hint-2" onmouseenter="showToolTip('tip-2')" onmouseleave="hideToolTip('tip-2')"
                             onclick="displayHintTwo()" disabled>Name Hint</button>
+                            <div class="hint-unlock-count">Unlocks in <%=4 - guesses.length %> tries</div>
                     <% } %>
                     <span id="tip-2" class="tooltiptext tooltip-2">Reveal half of the character's name</span>
                 </div>
-
             </div>
         </div>
         <div class="flex-box">

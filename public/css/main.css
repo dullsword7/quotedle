@@ -3,6 +3,7 @@
     /* --bs-primary-rgb: #672222; */
 }
 
+
 html {
     height: 100%;
     margin: 0;
@@ -94,7 +95,7 @@ input[type="text"] {
 .hint-box {
     background-color: #26292e;
     width: 100%;
-    height: 100px;
+    min-height: 100px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -121,6 +122,7 @@ button:not(:disabled) {
     background-color: #26292e;
     height: 50px;
     margin: 25px;
+    margin-bottom: 5px;
     font-size: 20px;
     padding: 10px;
 }
@@ -144,6 +146,14 @@ button:not(:disabled) {
 .tooltip {
     position: relative;
     display: inline-block;
+}
+
+.hint-unlock-count {
+    background-color: #26292e;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px;
+    opacity: 50%;
 }
 
 .hint-button:disabled {
@@ -206,4 +216,71 @@ button:not(:disabled) {
 }
 form {
     display: inline;
+}
+
+@media (max-width: 500px) {
+    h1 {
+        max-width: 50%;
+        font-size: 20px;
+        margin-right: 120px;
+    }
+    .d-border {
+        min-width: 90%;
+    }
+    .hint-box {
+        min-width: 90%;
+    }
+    .quote-box {
+        min-width: 90%;
+        font-size: medium;
+    }
+    input[type="text"] {
+        min-width: 90%;
+    }
+    .guess-item {
+        min-width: 90%;
+    }
+    .game-mode-holder {
+        font-size: 10px;
+    }
+    .game-mode-selection {
+        max-width: 60%;
+        font-size: 10px;
+        padding: 2px;
+        position: relative;
+        left: 65%;
+    }
+    .toggle-anime-western-shows {
+        max-width: 37%;
+        right: 15px;
+    }
+    .toggle-button {
+        font-size: 10px;
+        max-width: 50%;
+    }
+    .tooltip {
+        height: auto;
+    }
+    .hint-unlock-count {
+        font-size: 12px;
+        text-align: center;
+        margin: 10px;
+        opacity: 50%;
+    }
+    .hint-button {
+        padding: 10px;
+        margin: 20px;
+        margin-bottom: 5px;
+        font-size: 17px;
+    }
+    #display-hint-1, #display-hint-2 {
+        width: 100%;
+        height: auto;
+        font-family: 'Poppins', sans-serif;
+        font-size: 20px;
+        text-align: center;
+        padding: 5px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
 }
