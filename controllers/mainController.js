@@ -18,11 +18,11 @@ var quoteObj = {
     hintString: ''
 };
 
-var quoteObj = {
-    show: 'One Piece',
-    character: 'Jwbrowning',
-    quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
-}
+// var quoteObj = {
+//     show: 'One Piece',
+//     character: 'Jwbrowning',
+//     quote: 'I would think that he\'s already seen through your heart, and is simply playing the fool to use you. He yanks on the strings of your cheap pride and you dance like a little marionette.'
+// }
 
 var start = true;
 var gameMode = 'random';
@@ -38,7 +38,7 @@ exports.homepage = async(req, res) => {
 
         // Handles initializing the quote for the first time only
         if (start) {
-            // quoteObj = await helpers.fetchQuoteObject(gameMode);
+            quoteObj = await helpers.fetchQuoteObject(gameMode);
 
             // Splits the character's name on white spaces into an array
             var nameArray = quoteObj.character.split(" ");
@@ -143,7 +143,7 @@ exports.playAgain = async(req, res) => {
     hint1 = false;
     hint2 = false;
 
-    // quoteObj = await helpers.fetchQuoteObject(gameMode);
+    quoteObj = await helpers.fetchQuoteObject(gameMode);
 
     // Splits the character's name on white spaces into an array
     var nameArray = quoteObj.character.split(" ");
