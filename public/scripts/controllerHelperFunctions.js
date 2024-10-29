@@ -14,7 +14,7 @@ exports.fetchQuoteObject = async (gameMode) => {
 
 function fetchUrl(gameMode) {
     if (gameMode == 'random') {
-        return 'https://animechan.xyz/api/random';
+        return 'https://animechan.io/api/v1/quotes/random';
     } else if (gameMode == 'game+of+thrones') {
         return 'https://api.gameofthronesquotes.xyz/v1/random';
     } else if (gameMode == 'breaking+bad') {
@@ -46,9 +46,9 @@ function processQuoteObj(quoteObj, gameMode) {
     } else {
         // fetched from animechan.xyz
         return {
-            show: quoteObj.anime,
-            character: quoteObj.character,
-            quote: quoteObj.quote,
+            show: quoteObj.data.anime.name,
+            character: quoteObj.data.character.name,
+            quote: quoteObj.data.content,
             acceptableAnswers: [],
             hintString: ''
         }
