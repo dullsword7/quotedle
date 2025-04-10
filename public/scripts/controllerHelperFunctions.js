@@ -14,7 +14,8 @@ exports.fetchQuoteObject = async (gameMode) => {
 
 function fetchUrl(gameMode) {
     if (gameMode == 'random') {
-        return 'https://animechan.io/api/v1/quotes/random';
+        // this link needs to be updated whenever animchan changes their link
+        return 'https://api.animechan.io/v1/quotes/random';
     } else if (gameMode == 'game+of+thrones') {
         return 'https://api.gameofthronesquotes.xyz/v1/random';
     } else if (gameMode == 'breaking+bad') {
